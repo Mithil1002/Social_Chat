@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+<p>hello</p>
+{% block content %}
+
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 4fr 2fr;
+        grid-gap: 100px
+    }
+</style>
+<div class = "home-container">
+    <div>
+        {% include 'baseapp/browse_topics.html' %}
+    </div>
+    <div>
+        {% include 'baseapp/feed.html' %}
+    </div>
+    <div>
+        {% include 'baseapp/activity.html' %}
+    </div>
+
+</div>
+
+{% endblock %}

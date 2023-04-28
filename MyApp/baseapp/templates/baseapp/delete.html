@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+    .form{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+    }
+</style>
+<div class="form">
+    <form method="post" action="">
+        {% csrf_token %}
+        <p> Are you sure you want to delete "{{object}}"</p>
+        <a href="{{request.META.HTTP_REFERER}}">
+            <button class="btn btn-light">Back</button>
+        </a>
+
+
+        <button type="submit" class="btn btn-secondary">Confirm</button>
+    </form>
+</div>
+{% endblock %}

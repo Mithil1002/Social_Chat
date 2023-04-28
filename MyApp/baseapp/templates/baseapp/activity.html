@@ -1,0 +1,32 @@
+<style>
+    .activity{
+        padding-right: 10px;
+        margin-left:30px;
+        margin-right:15px;
+
+    }
+    .heading{
+        padding:10px;
+    }
+    .card{
+    background-color:#7d7d7d;
+    }
+
+
+</style>
+<div class="activity">
+    <div class="heading">
+        <h3 class="text-center">Recent Messages</h3>
+    </div>
+    {% for i in all_msg %}
+        <div style="padding-bottom:20px">
+            <h5 style="text-align:left">{{i.room}}</h5>
+            <p style="margin-bottom:0">{{i}}</p>
+            <div style="text-align:right">
+                <small><a href="{% url 'userprofile' i.user.id %}" style="color:#59be94;">@{{i.user}} </a>{{ i.created|timesince }} ago</small>
+            </div>
+        </div>
+
+
+    {% endfor %}
+</div>

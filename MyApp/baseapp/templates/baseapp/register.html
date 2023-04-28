@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<style>
+    .login-register{
+
+    }
+
+    .login{
+    width: 20%;
+    margin: auto;
+    text-align: center;
+    }
+
+</style>
+
+{% if page == 'login' %}
+<div class="login-register">
+    <div class="login">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="mx-auto">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" placeholder="Username">
+            </div>
+
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+            <br>
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+        <br>
+        <p>Haven't signed up yet ?</p>
+        <a href="{% url 'register' %}">
+            <button type="submit" class="btn btn-outline-light" style="color:#59be94;">Register</button>
+        </a>
+    </div>
+    {% else %}
+    <div class="login">
+        <!--        <form method="post" action="">-->
+        <!--            {% csrf_token %}-->
+        <!--            <div class="mx-auto">-->
+        <!--                <label class="form-label">Username</label>-->
+        <!--                <input type="text" class="form-control" name="username" placeholder="Username">-->
+        <!--            </div>-->
+
+        <!--            <div>-->
+        <!--                <label class="form-label">Password</label>-->
+        <!--                <input type="password" class="form-control" name="password" placeholder="Password">-->
+        <!--            </div>-->
+        <!--            <div>-->
+        <!--                <label class="form-label">Confirm Password</label>-->
+        <!--                <input type="password" class="form-control" name="c_password" placeholder="Confirm Password">-->
+        <!--            </div>-->
+        <!--            <br>-->
+        <!--            <button type="submit" class="btn btn-primary">Register</button>-->
+        <!--        </form>-->
+        <!--        <br>-->
+        <!--        <p>Already have an account ?</p>-->
+        <!--        <a href="{% url 'register' %}">-->
+        <!--            <button type="submit" class="btn btn-secondary">Login Instead</button>-->
+        <!--        </a>-->
+
+        <form>
+            {% for field in form %}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                <br>
+                {% render_field field class="form-control"%}
+            </div>
+            {% endfor %}
+            <br>
+            <button type="submit" class="btn btn-secondary">Register</button>
+        </form>
+        <br>
+        <p>Already have an account ?</p>
+        <a href="{% url 'register' %}">
+            <button type="submit" class="btn btn-light">Login Instead</button>
+        </a>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

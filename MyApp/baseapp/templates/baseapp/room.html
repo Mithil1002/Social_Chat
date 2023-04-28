@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    .room-container{
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        grid-gap: 100px
+    }
+    .room{
+    text-align:center;
+    padding-left: 30px;
+    padding-top:10px;
+    }
+
+    .conversation{
+    padding-left:30px;
+    padding-bottom:20px;
+
+    }
+    .form-control{
+    width:60%;
+    border:10px;
+
+    }
+    .participants{
+    padding-bottom:20px;
+
+    }
+
+
+
+</style>
+<div class='room-container'>
+    <div>
+        <div class="room">
+            <h1>{{Room.name}}</h1>
+        </div>
+        <p class="conversation">{{Room.description}}</p>
+        <div class="conversation">
+            <h3>Conversation</h3>
+            {% if request.user.is_authenticated %}
+            <div class="comment-form">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="text" name="body" class="form-control" placeholder="write your message here">
+                    <div style="padding-top:10px">
+                        <button type="submit" class="btn btn-secondary">Enter</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            <br>
+            <div class="comment-wrapper">
+                {% for i in room_message %}
+                <div>
+
+                    <small style="color:#59be94;">@{{ i.user }}</small> <small>{{ i.created | timesince }} ago </small>
+                    <p>{{i.body}}</p>
+                    <div style="padding-top:0;">
+                        {% if request.user == i.user %}
+                        <a href="{% url 'delete-message' i.id %}" style="color:#FFFFFF;">Delete Message</a>
+                        {% endif %}
+                    </div>
+                    <hr>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    <div class="participants">
+        <h3 class="text-center" style="padding:10px ">Participants</h3>
+        {% for i in participants %}
+        <div>
+            <p style="color:#59be94;"> @{{i.username}}</p>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

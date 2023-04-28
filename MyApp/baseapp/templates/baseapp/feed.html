@@ -1,0 +1,36 @@
+<style>
+    .card{
+
+    background-color:#7d7d7d;
+    }
+    .heading{
+    padding:10px;
+    }
+
+
+
+</style>
+<div class="heading">
+    <h3 class="text-center ">Available Rooms</h3>
+</div>
+{% for room in rooms %}
+<div>
+    <div>
+        <a href="{% url 'userprofile' room.host.id %}" style="color:#59be94;">@{{room.host.username}}</a>
+    </div>
+    <div class="card" style="width: 100%;">
+        <div class="card-header">
+            <h3><a href="/room/{{room.id}}" style="color:#ffffff;">{{room.name}}</a></h3>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-body-primary"><b>{{room.topic.name}}</b></h6>
+            <p class="card-text">{{room.description}}</p>
+            {% if request.user == room.host%}
+            <a href="{% url 'update' room.id %}" style="color:#ffffff;">Edit</a>
+            <a href="{% url 'delete' room.id %}" style="color:#ffffff;">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br>
+{% endfor %}

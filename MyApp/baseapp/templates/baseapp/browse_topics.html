@@ -1,0 +1,24 @@
+<style>
+    .topics{
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    .hello{
+    padding-bottom: 10px;
+    }
+
+</style>
+
+<div class="topics">
+    <div class="hello">
+    <h3>Browse Topics</h3>
+</div>
+    <div>
+        <a href="{% url 'Home' %}" style="color:#59be94;">All Rooms</a>
+    </div>
+    {% for i in topics %}
+    <div>
+        <a href="{% url 'Home' %}?q={{i.name}}"style="color:#59be94;">{{i.name}}</a>
+    </div>
+    {% endfor %}
+</div>
